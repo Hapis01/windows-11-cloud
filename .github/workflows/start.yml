@@ -1,1 +1,18 @@
+name: Start Windows 11 Cloud
 
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 360  # 6 jam
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Jalankan Start.bat
+      run: |
+        cd scripts
+        start.bat
