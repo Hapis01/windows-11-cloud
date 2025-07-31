@@ -1,18 +1,18 @@
-name: Start Windows 11 Cloud
+name: Windows 11 Cloud Boot
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: windows-latest
-    timeout-minutes: 360  # 6 jam
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout Repo
       uses: actions/checkout@v3
 
-    - name: Jalankan Start.bat
+    - name: Unzip Ngrok and Run Script
       run: |
-        cd scripts
-        start.bat
+        powershell Expand-Archive -Path scripts/ngrok.zip -DestinationPath scripts/ngrok
+        scripts\start.bat
