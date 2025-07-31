@@ -1,1 +1,3 @@
-
+@echo off
+echo Menjalankan loop.bat...
+start loop.bat
