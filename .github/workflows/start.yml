@@ -1,18 +1,24 @@
-name: Windows 11 Cloud Boot
+name: Windows 11 Cloud with Ngrok
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout Repo
+    - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Unzip Ngrok and Run Script
+    - name: Unzip Ngrok
       run: |
-        powershell Expand-Archive -Path scripts/ngrok.zip -DestinationPath scripts/ngrok
-        scripts\start.bat
+        Expand-Archive -Path ngrok.zip -DestinationPath ngrok
+        dir ngrok
+      shell: pwsh
+
+    - name: Run Ngrok
+      run: |
+        .\ngrok\ngrok.exe authtoken 30dfRbafgrpHHNWBjmEW0yy345z_3Tp1aSYhSfmcQbtYsiw9q
+        .\ngrok\ngrok.exe tcp 3389
+      shell: pwsh
